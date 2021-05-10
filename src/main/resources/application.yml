@@ -5,7 +5,7 @@ application-version: @project.version@
 contact-name: Julián Camilo Vega Rocha
 contact-email: ingjulianvega@gmail.com
 contact-url: https://twitter.com/ingjulianvega
-
+#Spring
 spring:
   application:
     name: ssc-asu-visit
@@ -20,18 +20,29 @@ spring:
   cache:
     jcache:
       config: classpath:ehcache.xml
+#ActiveMQ
+active-mq:
+  broker-url: tcp://localhost:61616
+  user: artemis
+  password: simetraehcapa
 #General configuration
 server:
   port: 8108
   servlet:
     context-path: /asu/v1/visit
 #Logging
-#logging:
-#  level:
-#    root: DEBUG
+logging:
+  level:
+    ingjulianvega:
+      ximic: DEBUG
 #Exceptions
 visit:
   success: The operation was successful.
   prefix: 'API-VIST:'
   error:
     general: There was an unexpected error. Please try again.
+log4j:
+  logger:
+    org:
+      apache:
+        activemq: DEBUG
