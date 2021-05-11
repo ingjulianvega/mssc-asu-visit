@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class UpdateVisitEvent implements Serializable {
-    static final long serialVersionUID = -125380846123986579L;
+    static final long serialVersionUID = 8721756290445221053L;
 
     private Visit visit;
 
