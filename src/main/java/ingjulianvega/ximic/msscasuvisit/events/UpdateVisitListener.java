@@ -15,8 +15,9 @@ public class UpdateVisitListener {
     private final VisitService visitService;
 
     @JmsListener(destination = JmsConfig.UPDATE_VISIT_QUEUE)
-    public void listen(UpdateVisitEvent event){
+//    public void listen(UpdateVisitEvent event){
+    public void listen(String event){
         log.debug("Got updateVisit " + event.toString());
-        visitService.create(event.getVisit());
+        //visitService.create(event.getVisit());
     }
 }
