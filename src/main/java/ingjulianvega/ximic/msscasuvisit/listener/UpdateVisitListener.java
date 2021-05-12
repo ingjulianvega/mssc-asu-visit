@@ -1,5 +1,6 @@
-package ingjulianvega.ximic.msscasuvisit.events;
+package ingjulianvega.ximic.msscasuvisit.listener;
 
+import ingjulianvega.ximic.events.UpdateVisitEvent;
 import ingjulianvega.ximic.msscasuvisit.configuration.JmsConfig;
 import ingjulianvega.ximic.msscasuvisit.services.VisitService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,7 @@ public class UpdateVisitListener {
     private final VisitService visitService;
 
     @JmsListener(destination = JmsConfig.UPDATE_VISIT_QUEUE)
-//    public void listen(UpdateVisitEvent event){
-    public void listen(String event){
+    public void listen(UpdateVisitEvent event){
         log.debug("Got updateVisit " + event.toString());
         //visitService.create(event.getVisit());
     }

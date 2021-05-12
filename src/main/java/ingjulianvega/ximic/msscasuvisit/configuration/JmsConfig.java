@@ -20,7 +20,6 @@ import javax.jms.ConnectionFactory;
 @Configuration
 public class JmsConfig {
 
-
     @Value("${active-mq.user}")
     private String user;
 
@@ -30,36 +29,24 @@ public class JmsConfig {
     public static final String UPDATE_VISIT_QUEUE = "update-visit";
 
     @Bean
-    public JmsListenerContainerFactory warehouseFactory(ConnectionFactory factory, DefaultJmsListenerContainerFactoryConfigurer configurer){
-        DefaultJmsListenerContainerFactory containerFactory =  new DefaultJmsListenerContainerFactory();
-        configurer.configure(containerFactory, factory);
-
-        return containerFactory;
+    public MessageConverter jacksonJmsMessageConverter(){
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setTargetType(MessageType.TEXT);
+        converter.setTypeIdPropertyName("_type");
+        return converter;
     }
 
+    @Bean
     public ActiveMQConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("admin","admin","tcp://localhost:61616");
         return factory;
     }
 
     @Bean
-    public JmsTemplate jmsTemplate(){
-        return new JmsTemplate(connectionFactory());
-    }
-
-    @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(){
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
+        factory.setMessageConverter(jacksonJmsMessageConverter());
         return factory;
-    }
-
-    @Bean // Serialize message content to json using TextMessage
-    public MessageConverter jacksonJmsMessageConverter(ObjectMapper objectMapper) {
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-        converter.setTargetType(MessageType.TEXT);
-        converter.setTypeIdPropertyName("_type");
-        converter.setObjectMapper(objectMapper);
-        return converter;
     }
 }

@@ -12,9 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Visit implements Serializable {
-
-    static final long serialVersionUID = -4592673704938978571L;
+public class Visit  {
 
     private UUID patientId;
     private UUID companionId;

@@ -1,4 +1,4 @@
-package ingjulianvega.ximic.msscasuvisit.events;
+package ingjulianvega.ximic.events;
 
 import ingjulianvega.ximic.msscasuvisit.web.model.Visit;
 import lombok.AllArgsConstructor;
@@ -12,9 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpdateVisitEvent implements Serializable {
-    static final long serialVersionUID = 8721756290445221053L;
+public class UpdateVisitEvent {
 
     private Visit visit;
-
 }
