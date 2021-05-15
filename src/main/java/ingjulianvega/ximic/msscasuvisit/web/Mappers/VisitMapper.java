@@ -1,7 +1,9 @@
 package ingjulianvega.ximic.msscasuvisit.web.Mappers;
 
 
+import ingjulianvega.ximic.events.UpdateVisitEvent;
 import ingjulianvega.ximic.msscasuvisit.domain.VisitEntity;
+import ingjulianvega.ximic.msscasuvisit.web.model.Visit;
 import ingjulianvega.ximic.msscasuvisit.web.model.VisitDto;
 import org.mapstruct.Mapper;
 
@@ -15,4 +17,6 @@ public interface VisitMapper {
     VisitEntity visitDtoToVisitEntity(VisitDto visitDto);
 
     ArrayList<VisitDto> visitEntityListToVisitDtoList(List<VisitEntity> visitEntityList);
+
+    Visit updateVisitEventToVisit(UpdateVisitEvent updateVisitEvent);
 }
