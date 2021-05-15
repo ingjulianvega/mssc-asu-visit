@@ -20,6 +20,7 @@ public class UpdateVisitListener {
     @JmsListener(destination = JmsConfig.UPDATE_VISIT_QUEUE)
     public void listen(UpdateVisitEvent updateVisitEvent){
         log.debug("Got UpdateVisitEvent " + updateVisitEvent.toString());
+        //TODO Esto debe ser un update no un create (cuidado con el campo billing)
         visitService.create(visitMapper.updateVisitEventToVisit(updateVisitEvent));
     }
 }
