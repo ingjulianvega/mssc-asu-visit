@@ -15,6 +15,8 @@ public interface VisitService {
 
     VisitList getByPatientId(UUID patientId);
 
+    VisitList getByDiseaseId(UUID diseaseId);
+
     VisitList getByCreatedDate(OffsetDateTime createdDate);
 
     void create(Visit visit);
@@ -22,5 +24,6 @@ public interface VisitService {
     void updateById(UUID id, Visit visit);
 
     void deleteById(UUID id);
+
 
 }

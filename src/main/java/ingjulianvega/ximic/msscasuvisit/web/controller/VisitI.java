@@ -61,6 +61,19 @@ public interface VisitI {
             method = RequestMethod.GET)
     ResponseEntity<VisitList> getByPatientId(@Parameter(in = ParameterIn.PATH, description = "The visit id", required = true, schema = @Schema()) @NotNull @PathVariable("patient-id") UUID patientId);
 
+    @Operation(summary = "Endpoint to get the information of visits given a disease", description = "Returns a list of visits", tags = {"visit"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "The operation was successful.", content = @Content(schema = @Schema(implementation = VisitList.class))),
+
+            @ApiResponse(responseCode = "400", description = "400 - business error", content = @Content(schema = @Schema(implementation = ApiError.class))),
+
+            @ApiResponse(responseCode = "500", description = "500 - server error", content = @Content(schema = @Schema(implementation = ApiError.class)))})
+    @RequestMapping(value = "disease/{disease-id}",
+            produces = {"application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<VisitList> getByDiseaseId(@Parameter(in = ParameterIn.PATH, description = "The disease id", required = true, schema = @Schema()) @NotNull @PathVariable("disease-id") UUID diseaseId);
+
+
     @Operation(summary = "Endpoint to get the information of a visit given the creation date", description = "Returns a list of visits", tags = {"visit"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "The operation was successful.", content = @Content(schema = @Schema(implementation = VisitList.class))),
@@ -71,8 +84,7 @@ public interface VisitI {
     @RequestMapping(value = "created-date/{created-date}",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<VisitList> getByCreatedDate(@Parameter(in = ParameterIn.PATH, description = "The visit first last name", required = true, schema = @Schema()) @NotNull @PathVariable("created-date") OffsetDateTime createdDate);
-
+    ResponseEntity<VisitList> getByCreatedDate(@Parameter(in = ParameterIn.PATH, description = "The date of creation", required = true, schema = @Schema()) @NotNull @PathVariable("created-date") OffsetDateTime createdDate);
 
     @Operation(summary = "Endpoint to create a visit", description = "Creates a new visit", tags = {"visit"})
     @ApiResponses(value = {

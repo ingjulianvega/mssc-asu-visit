@@ -37,6 +37,11 @@ public class VisitController implements VisitI {
     }
 
     @Override
+    public ResponseEntity<VisitList> getByDiseaseId(UUID diseaseId) {
+        return new ResponseEntity<>(visitService.getByDiseaseId(diseaseId), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<VisitList> getByCreatedDate(OffsetDateTime createdDate) {
         return new ResponseEntity<>(visitService.getByCreatedDate(createdDate), HttpStatus.OK);
     }

@@ -12,4 +12,6 @@ public interface VisitRepository extends JpaRepository<VisitEntity, UUID>, JpaSp
     List<VisitEntity> findByPatientId(UUID patientId);
 
     List<VisitEntity> findByCreatedDate(Timestamp createdDate);
+
+    List<VisitEntity> findByDiseaseId(UUID diseaseId);
 }

@@ -56,6 +56,15 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public VisitList getByDiseaseId(UUID diseaseId) {
+        log.debug("getByDiseaseId()...");
+        return VisitList
+                .builder()
+                .visitDtoList(visitMapper.visitEntityListToVisitDtoList(visitRepository.findByDiseaseId(diseaseId)))
+                .build();
+    }
+
+    @Override
     public VisitList getByCreatedDate(OffsetDateTime createdDate) {
         log.debug("findByCreatedDate()...");
         return VisitList
