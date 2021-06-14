@@ -7,9 +7,8 @@
 		<artifactId>mssc-asu-bom</artifactId>
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-	<groupId>ingjulianvega.ximic</groupId>
 	<artifactId>mssc-asu-visit</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>mssc-asu-visit</name>
 	<description>ASU visit microservice (consulta)</description>
 </project>

@@ -14,19 +14,17 @@ import org.springframework.jms.support.converter.MessageType;
 @Configuration
 public class JmsConfig {
 
-    @Value("${active-mq.user}")
-    private String user;
-
-    @Value("${active-mq.password}")
-    private String password;
-
-    @Value("${active-mq.broker-url}")
-    private String brokerUrl;
-
     public static final String UPDATE_VISIT_QUEUE = "update-visit";
 
+    @Value("${spring.activemq.broker-url}")
+    private String brokerUrl;
+    @Value("${spring.activemq.user}")
+    private String user;
+    @Value("${spring.activemq.password}")
+    private String password;
+
     @Bean
-    public MessageConverter jacksonJmsMessageConverter(){
+    public MessageConverter jacksonJmsMessageConverter() {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_type");
@@ -34,13 +32,13 @@ public class JmsConfig {
     }
 
     @Bean
-    public ActiveMQConnectionFactory connectionFactory(){
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(user,password,brokerUrl);
+    public ActiveMQConnectionFactory connectionFactory() {
+        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(user, password, brokerUrl);
         return factory;
     }
 
     @Bean
-    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(){
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory());
         factory.setMessageConverter(jacksonJmsMessageConverter());
