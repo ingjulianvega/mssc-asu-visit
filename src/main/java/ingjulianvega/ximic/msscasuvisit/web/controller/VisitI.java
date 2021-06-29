@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -84,7 +85,9 @@ public interface VisitI {
     @RequestMapping(value = "created-date/{created-date}",
             produces = {"application/json"},
             method = RequestMethod.GET)
-    ResponseEntity<VisitList> getByCreatedDate(@Parameter(in = ParameterIn.PATH, description = "The date of creation", required = true, schema = @Schema()) @NotNull @PathVariable("created-date") OffsetDateTime createdDate);
+    ResponseEntity<VisitList> getByCreatedDate(@Parameter(in = ParameterIn.PATH, description = "The date of creation",
+                                                required = true, schema = @Schema()) @NotNull @PathVariable("created-date")
+                                               @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) OffsetDateTime createdDate);
 
     @Operation(summary = "Endpoint to create a visit", description = "Creates a new visit", tags = {"visit"})
     @ApiResponses(value = {

@@ -67,9 +67,15 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public VisitList getByCreatedDate(OffsetDateTime createdDate) {
         log.debug("findByCreatedDate()...");
+        OffsetDateTime from = OffsetDateTime.of(createdDate.getYear(), createdDate.getMonthValue(), createdDate.getDayOfMonth(), 0, 0, 0, 0,createdDate.getOffset());
+        OffsetDateTime to = OffsetDateTime.of(createdDate.getYear(), createdDate.getMonthValue(), createdDate.getDayOfMonth(), 23, 59, 59, 0,createdDate.getOffset());
+
         return VisitList
                 .builder()
-                .visitDtoList(visitMapper.visitEntityListToVisitDtoList(visitRepository.findByCreatedDate(dateMapper.asTimestamp(createdDate))))
+                .visitDtoList(visitMapper.visitEntityListToVisitDtoList(
+                        visitRepository.findByCreatedDateBetween(
+                                dateMapper.asTimestamp(from),
+                                dateMapper.asTimestamp(to))))
                 .build();
     }
 

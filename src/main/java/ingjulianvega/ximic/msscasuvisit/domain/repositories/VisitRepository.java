@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface VisitRepository extends JpaRepository<VisitEntity, UUID>, JpaSpecificationExecutor<VisitEntity> {
     List<VisitEntity> findByPatientId(UUID patientId);
 
-    List<VisitEntity> findByCreatedDate(Timestamp createdDate);
+    List<VisitEntity> findByCreatedDateBetween(Timestamp iniDate,Timestamp endDate);
 
     List<VisitEntity> findByDiseaseId(UUID diseaseId);
 }
