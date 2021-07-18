@@ -12,6 +12,7 @@ import ingjulianvega.ximic.msscasuvisit.web.model.VisitList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -43,7 +44,14 @@ public class VisitServiceImpl implements VisitService {
         log.debug("getById()...");
         return visitMapper.visitEntityToVisitDto(
                 visitRepository.findById(id)
-                        .orElseThrow(() -> new VisitException(ErrorCodeMessages.VISIT_NOT_FOUND, "")));
+                        .orElseThrow(() -> VisitException
+                                .builder()
+                                .httpStatus(HttpStatus.BAD_REQUEST)
+                                .apiCode(ErrorCodeMessages.VISIT_NOT_FOUND_API_CODE)
+                                .error(ErrorCodeMessages.VISIT_NOT_FOUND_ERROR)
+                                .message(ErrorCodeMessages.VISIT_NOT_FOUND_MESSAGE)
+                                .solution(ErrorCodeMessages.VISIT_NOT_FOUND_SOLUTION)
+                                .build()));
     }
 
     @Override
@@ -107,7 +115,14 @@ public class VisitServiceImpl implements VisitService {
     public void updateById(UUID id, Visit visit) {
         log.debug("updateById...");
         VisitEntity visitEntity = visitRepository.findById(id)
-                .orElseThrow(() -> new VisitException(ErrorCodeMessages.VISIT_NOT_FOUND, ""));
+                .orElseThrow(() -> VisitException
+                        .builder()
+                        .httpStatus(HttpStatus.BAD_REQUEST)
+                        .apiCode(ErrorCodeMessages.VISIT_NOT_FOUND_API_CODE)
+                        .error(ErrorCodeMessages.VISIT_NOT_FOUND_ERROR)
+                        .message(ErrorCodeMessages.VISIT_NOT_FOUND_MESSAGE)
+                        .solution(ErrorCodeMessages.VISIT_NOT_FOUND_SOLUTION)
+                        .build());
 
         visitEntity.setPatientId(visit.getPatientId());
         visitEntity.setReason(visit.getReason());
