@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -12,17 +14,20 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Visit  {
+public class Visit {
 
+    @NotNull
     private UUID patientId;
     private UUID companionId;
+    @NotNull
     private UUID visitTypeId;
+    @NotNull
     private UUID billingId;
     private String reason;
     private int height;
     private int systolicBloodPressure;
     private int diastolicBloodPressure;
-    private int weight;
+    private float weight;
     private int heartRate;
     private float temperature;
     private UUID diseaseId;
