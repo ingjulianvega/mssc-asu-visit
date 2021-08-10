@@ -43,7 +43,7 @@ public class VisitEntity extends BaseEntity {
     private int height;
     private int systolicBloodPressure;
     private int diastolicBloodPressure;
-    private int weight;
+    private float weight;
     private int heartRate;
     private float temperature;
 
